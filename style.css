@@ -47,7 +47,7 @@ body {
 /* СИСТЕМА ОСКОЛКОВ (ПРИВЯЗАНА К КОНТЕЙНЕРУ) */
 .shard-wrapper {
     position: absolute;
-    width: 28%; /* Размер осколка относительно всей картинки */
+    width: 33%; /* Размер осколка относительно всей картинки */
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 10;
@@ -60,9 +60,9 @@ body {
 
 /* ТОЧНЫЕ ПОЗИЦИИ ПО ТВОЕМУ ФИНАЛЬНОМУ АРТУ */
 #node-pupisto { top: 48%; left: 2%; }    /* Театр (Золотой) - Слева внизу */
-#node-shaddom { top: 12%; left: 16%; }   /* Frost (Синий) - Слева вверху */
+#node-shaddom { top: 18%; left: 12%; }   /* Frost (Синий) - Слева вверху */
 #node-dozen   { top: 2%; left: 36%; }    /* Cotton (Зеленый) - Центр */
-#node-lilit   { top: 12%; left: 58%; }   /* Digital Sin (Пурпур) - Справа вверху */
+#node-lilit   { top: 18%; left: 64%; }   /* Digital Sin (Пурпур) - Справа вверху */
 #node-saddle  { top: 48%; left: 70%; }   /* VR-Saddle (Циан) - Справа внизу */
 
 /* ЭФФЕКТЫ */
