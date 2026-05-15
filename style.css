@@ -8,119 +8,105 @@ body {
     background-color: #000;
     color: #fff;
     font-family: 'Jura', sans-serif;
-    overflow-x: hidden;
+    overflow: hidden; /* Запрещаем скролл, всё на одном экране */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
+    width: 100vw;
 }
 
-/* CRT ЭФФЕКТ СЕТКИ */
+/* CRT ЭФФЕКТ */
 .crt-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
     background-size: 100% 4px, 3px 100%;
     pointer-events: none;
     z-index: 100;
-    opacity: 0.3;
 }
 
+/* КОНТЕЙНЕР, КОТОРЫЙ ВСЕГДА КВАДРАТНЫЙ (КАК ТВОЙ АРТ) */
 .main-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    height: 95vh; /* Занимает почти всю высоту экрана */
+    aspect-ratio: 1 / 1; /* Жестко держим пропорции картинки */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .background-maiden {
+    width: 100%;
     height: 100%;
-    width: auto;
     object-fit: contain;
     z-index: 1;
 }
 
-/* СИСТЕМА ОСКОЛКОВ */
-.shard-system {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 10;
-}
-
+/* СИСТЕМА ОСКОЛКОВ (ПРИВЯЗАНА К КОНТЕЙНЕРУ) */
 .shard-wrapper {
     position: absolute;
-    width: 15%; /* Программный размер */
+    width: 28%; /* Размер осколка относительно всей картинки */
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
 }
 
 .shard-img {
     width: 100%;
-    filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
-    transition: filter 0.3s;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
 }
 
-/* ПОЗИЦИОНИРОВАНИЕ ОСКОЛКОВ (ПО ДУГЕ КАК НА АРТЕ) */
-#node-shaddom { top: 12%; left: 18%; }
-#node-dozen   { top: 5%; left: 42.5%; }
-#node-saddle  { top: 12%; left: 67%; }
-#node-pupisto { top: 38%; left: 8%; }
-#node-lilit   { top: 38%; left: 77%; }
+/* ТОЧНЫЕ ПОЗИЦИИ ПО ТВОЕМУ ФИНАЛЬНОМУ АРТУ */
+#node-pupisto { top: 48%; left: 2%; }    /* Театр (Золотой) - Слева внизу */
+#node-shaddom { top: 12%; left: 16%; }   /* Frost (Синий) - Слева вверху */
+#node-dozen   { top: 2%; left: 36%; }    /* Cotton (Зеленый) - Центр */
+#node-lilit   { top: 12%; left: 58%; }   /* Digital Sin (Пурпур) - Справа вверху */
+#node-saddle  { top: 48%; left: 70%; }   /* VR-Saddle (Циан) - Справа внизу */
 
-/* ЭФФЕКТЫ ПРИ НАВЕДЕНИИ */
+/* ЭФФЕКТЫ */
 .shard-wrapper:hover {
-    transform: scale(1.15) translateY(-10px);
+    transform: scale(1.1) translateY(-10px);
     z-index: 50;
 }
 
 .shard-wrapper:hover .shard-img {
-    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8)) brightness(1.2);
+    filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.8)) brightness(1.2);
 }
 
-/* ВСПЛЫВАЮЩАЯ ИНФОРМАЦИЯ */
+/* ИНФО-ПЛАШКИ */
 .shard-info {
     position: absolute;
-    top: 105%; left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.85);
+    bottom: -20px; left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    background: rgba(0, 10, 10, 0.95);
     border: 1px solid #0ff;
-    padding: 15px;
-    width: 250px;
+    padding: 12px;
+    width: 220px;
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
     transition: 0.3s;
     text-align: center;
-    pointer-events: none;
+    box-shadow: 0 0 20px rgba(0,255,255,0.2);
 }
 
 .shard-wrapper:hover .shard-info {
     opacity: 1;
-    visibility: visible;
 }
 
-.shard-info h3 {
-    color: #0ff;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    letter-spacing: 2px;
-}
-
-.shard-info p {
-    font-size: 0.85rem;
-    color: #ccc;
-    line-height: 1.4;
-}
+.shard-info h3 { color: #0ff; font-size: 1.1rem; margin-bottom: 5px; text-transform: uppercase; }
+.shard-info p { font-size: 0.8rem; color: #ccc; }
 
 /* ФУТЕР */
 .footer-status {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     width: 100%;
     text-align: center;
-    color: #444;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
+    color: #0ff;
+    font-size: 0.6rem;
+    letter-spacing: 5px;
+    opacity: 0.4;
     z-index: 5;
 }
-
-.copyright { margin-top: 5px; opacity: 0.5; }
